@@ -1,1 +1,53 @@
-site_name: My Docs
+site_name: Phils Blog
+site_description: A blog for my personal development projects
+site_url: https://philnewm.github.io/
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - content.code.select
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+  - obsidian-support
+  - rss:
+      abstract_chars_count: -1  # -1 for full content
+      abstract_delimiter: "" # <!-- more -->
+      date_from_meta:
+        as_creation: "date" # means from page.meta.date
+        as_update: "git" # means from git log
+        datetime_format: "%Y-%m-%d %H:%M"
+        default_time: "09:30"
+        default_timezone: Europe/Paris
+      enabled: true
+      feeds_filenames:
+        json_created: feed_json_created.json
+        json_updated: feed_json_updated.json
+        rss_created: feed_rss_created.xml
+        rss_updated: feed_rss_updated.xml
+      feed_ttl: 1440
+      image: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/128px-Feed-icon.svg.png
+      json_feed_enabled: true
+      length: 20
+      match_path: .*
+      pretty_print: false
+      rss_feed_enabled: true
+      url_parameters:
+        utm_source: "documentation"
+        utm_medium: "RSS"
+        utm_campaign: "feed-syndication"
+      use_git: true
+      use_material_blog: true
+      use_material_social_cards: true
