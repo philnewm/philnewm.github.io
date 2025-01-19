@@ -31,7 +31,7 @@
     
           - name: Install dependencies
             run: |
-              python{{ env.PYTHON_VERSION }} -m pip install --upgrade pip
+              python${{ env.PYTHON_VERSION }} -m pip install --upgrade pip
               if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
           - name: Start deployment process
