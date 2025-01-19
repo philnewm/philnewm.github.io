@@ -1,0 +1,42 @@
+---
+
+    name: Prepare GitHub-Pages Deployment
+    
+    on:
+      push:
+        branches:
+          - main
+
+    permissions:
+      contents: write
+
+    env:
+        PYTHON_VERSION: "3.12"
+      
+    jobs:
+      prepare-deployment:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repo
+            uses: actions/checkout@v4
+            with:
+              ref: 
+              fetch-depth: 0
+              submodules: true
+    
+          - name: Set up Python ${{ env.PYTHON_VERSION }}
+            uses: actions/setup-python@v5
+            with:
+              python-version: ${{ env.PYTHON_VERSION }}
+    
+          - name: Install dependencies
+            run: |
+              python{{ env.PYTHON_VERSION }} -m pip install --upgrade pip
+              if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    
+          - name: Start deployment process
+            run: |
+              mkdocs gh-deploy --config-file mkdocs.yml --remote-branch gh-pages --message "[Automated] deploy pages" --force
+            working-directory:  ./site
+    
+...
