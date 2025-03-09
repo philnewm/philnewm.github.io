@@ -37,13 +37,14 @@ markdown_extensions:
 plugins:
   - search
   - obsidian-support
-  # - mkdocs-git-revision-date-localized-plugin
-  # - meta:
-  #     title: Phils Blog
-  #     description: A blog for my personal development projects
+  - git-revision-date-localized
+  - meta:
+      title: Phils Blog
+      description: A blog for my personal development projects
   - blog:
       blog_dir: site/docs/
   - rss:
-    match_path: site/docs/.*
-    date_from_meta:
-      as_creation: date
+      match_path: site/docs/.*
+      date_from_meta:
+        as_creation: date.created
+        as_update: date.updated
