@@ -3,6 +3,21 @@ site_description: A blog for my personal development projects
 site_url: https://philnewm.github.io/
 theme:
   name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+      primary: deep purple
+      accent: cyan
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+      primary: deep purple
+      accent: cyan
   features:
     - content.code.copy
     - content.code.select
@@ -22,32 +37,13 @@ markdown_extensions:
 plugins:
   - search
   - obsidian-support
+  - mkdocs-git-revision-date-localized-plugin
+  - meta:
+      title: Phils Blog
+      description: A blog for my personal development projects
+  - blog:
+      blog_dir: site/docs/
   - rss:
-      abstract_chars_count: -1  # -1 for full content
-      abstract_delimiter: "" # <!-- more -->
-      date_from_meta:
-        as_creation: "date" # means from page.meta.date
-        as_update: "git" # means from git log
-        datetime_format: "%Y-%m-%d %H:%M"
-        default_time: "09:30"
-        default_timezone: Europe/Paris
-      enabled: true
-      feeds_filenames:
-        json_created: feed_json_created.json
-        json_updated: feed_json_updated.json
-        rss_created: feed_rss_created.xml
-        rss_updated: feed_rss_updated.xml
-      feed_ttl: 1440
-      image: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/128px-Feed-icon.svg.png
-      json_feed_enabled: true
-      length: 20
-      match_path: .*
-      pretty_print: false
-      rss_feed_enabled: true
-      url_parameters:
-        utm_source: "documentation"
-        utm_medium: "RSS"
-        utm_campaign: "feed-syndication"
-      use_git: true
-      use_material_blog: true
-      use_material_social_cards: true
+    match_path: site/docs/.*
+    date_from_meta:
+      as_creation: date
