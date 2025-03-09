@@ -38,9 +38,9 @@ plugins:
   - search
   - obsidian-support
   # - mkdocs-git-revision-date-localized-plugin
-  - meta:
-      title: Phils Blog
-      description: A blog for my personal development projects
+  # - meta:
+  #     title: Phils Blog
+  #     description: A blog for my personal development projects
   - blog:
       blog_dir: site/docs/
   - rss:
