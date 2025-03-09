@@ -37,7 +37,7 @@ markdown_extensions:
 plugins:
   - search
   - obsidian-support
-  - mkdocs-git-revision-date-localized-plugin
+  # - mkdocs-git-revision-date-localized-plugin
   - meta:
       title: Phils Blog
       description: A blog for my personal development projects
