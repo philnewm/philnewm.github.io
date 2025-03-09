@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A blog for my personal development projects">
+        <meta name="description" content="Set up basic CI for Ansible using Molecule">
       
       
       
@@ -27,7 +27,7 @@
     
     
       
-        <title>Getting started with Ansible Molecule - Phils Blog</title>
+        <title>Getting started with Molecule - Phils Blog</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started-with-ansible-molecule" class="md-skip">
+        <a href="#getting-started-with-molecule" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Getting started with Ansible Molecule
+              Getting started with Molecule
             
           </span>
         </div>
@@ -305,7 +305,7 @@
           
   
   <span class="md-ellipsis">
-    Getting started with Ansible Molecule
+    Getting started with Molecule
   </span>
   
 
@@ -316,7 +316,7 @@
         
   
   <span class="md-ellipsis">
-    Getting started with Ansible Molecule
+    Getting started with Molecule
   </span>
   
 
@@ -461,15 +461,6 @@
   <a href="#test-vagrant-instance" class="md-nav__link">
     <span class="md-ellipsis">
       Test Vagrant Instance
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vagrant" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vagrant
     </span>
   </a>
   
@@ -728,15 +719,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#vagrant" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vagrant
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#wrap-up" class="md-nav__link">
     <span class="md-ellipsis">
       Wrap-Up
@@ -760,21 +742,18 @@
                   
 
 
-<h1 id="getting-started-with-ansible-molecule">Getting started with Ansible Molecule</h1>
+<h1 id="getting-started-with-molecule">Getting started with Molecule</h1>
 <h2 id="intro">Intro</h2>
 <hr />
-<p>After reading through a bunch of Ansible molecule setup guides I noticed quite a bunch of them were outdated in at least one critical aspect. Will discuss the details of this in <a href="#prepare%20development%20environment">Prepare development environment</a>.
-@@TODO make inline markdown style links work in obsidian.</p>
-<p>So this is a guide on setting up Ansible Molecule for testing Ansible roles by running them against virtual machines. These virtual machines will be controlled by Vagrant using VirtualBox as provider.
+<p>This article is intended as a guide to set up Ansible Molecule for testing Ansible roles by running them against virtual machines. These virtual machines will be controlled by Vagrant using VirtualBox as provider.
 The code in this guide was developed and tested on AlmaLinux9 and Ubuntu22.04 for the software versions mentioned in <a href="#requirements">Requirements</a></p>
-<p>@@TODO figure out rules for separator placement</p>
 <h2 id="requirements">Requirements</h2>
 <hr />
 <h3 id="system">System</h3>
-<p>Since we will use VirtualBox virtual Machines in this guide it's required for you system to have virtualization enabled in your Mainboards BIOS or UEFI.
+<p>Since we will use <em>VirtualBox</em> virtual Machines in this guide it's required for your system to have virtualization enabled in your mainboard's BIOS or UEFI.
 Check this <a href="https://helpdeskgeek.com/how-to/how-to-enable-virtualization-in-bios-for-intel-and-amd/">article</a> for further details</p>
 <p>This guide is intended to be followed on a Linux system.
-This articles assumes you got a basic understanding of Ansible and how to operate within the Linux terminal.
+This article assumes you got a basic understanding of Ansible and how to operate within the Linux terminal.
 To follow this <a href="https://ultahost.com/knowledge-base/install-ansible-on-windows/">guide on a Windows system</a> you will need to use the Windows Subsystem for Linux (WSL) since Ansible is not supported on Windows.
 It does however support remote controlling <a href="https://docs.ansible.com/ansible/latest/os_guide/intro_windows.html">Windows hosts</a>.</p>
 <h3 id="python">Python</h3>
@@ -785,28 +764,31 @@ Here just the example install command for Ubuntu22.04
 <div class="admonition tip">
 <p class="admonition-title">Creating a <a href="https://realpython.com/python-virtual-environments-a-primer/">python virtual environment</a> for Ansible first is highly recommended.</p>
 </div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="si">${</span><span class="p">{ env.PYTHON_VERSION </span><span class="si">}</span><span class="o">}</span><span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>~/.venv/ansible_env
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>~/.venv/ansible_env
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">source</span><span class="w"> </span>~/.venv/ansible_env/bin/activate
 </span></code></pre></div>
-<p>Next we need a bunch of python packages like Ansible, Molecule and its Vagrant plugin.</p>
+<p>Next we need a bunch of python packages like Ansible, Molecule and its <em>Vagrant</em> plugin.</p>
 <p>Create a project directory and <code>cd</code> into it.
+At the time of writing there seems to be a <a href="https://github.com/ansible-community/molecule-plugins/issues/301">bug</a> with the latest version of molecule (v25.3.1) in context of the molecule plugins package.
+That's why we go for the versions listed here since they seem to work fine together.
 Create a <code>requirements.txt</code> file containing these lines:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">ansible</span><span class="o">==</span><span class="m">10</span>.6.0
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">molecule</span><span class="o">==</span><span class="m">24</span>.9.0
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>molecule-plugins<span class="o">[</span>vagrant<span class="o">]</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">docker</span><span class="o">==</span><span class="m">7</span>.1.0
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">ansible</span><span class="o">==</span><span class="m">11</span>.3.0
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">molecule</span><span class="o">==</span><span class="m">25</span>.1.0
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>molecule-plugins<span class="o">==</span><span class="m">23</span>.7.0
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>molecule-plugins<span class="o">[</span>vagrant<span class="o">]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">docker</span><span class="o">==</span><span class="m">7</span>.1.0
 </span></code></pre></div>
 <details class="tip">
 <summary>docker python packages</summary>
 <p>Installing the docker python package is only necessary due to a bug <a href="https://github.com/ansible/molecule/issues/2540">#32540</a> in molecule plugins.
 A fix for this one is already merged, see <a href="https://github.com/ansible-community/molecule-plugins/issues/166">#166</a> but no new release happened so far.</p>
 </details>
-<p>Now you can run upgrade pip (just to be sure) and install the requirements.</p>
+<p>Now you can run <code>upgrade pip</code> and install the requirements.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </span></code></pre></div>
 <h3 id="tools">Tools</h3>
-<p>As the title suggests you also need Virtualbox and Vagrant installed to follow along.</p>
+<p>As the title suggests you also need <em>Virtualbox</em> and <em>Vagrant</em> installed to follow along.</p>
 <p><strong>Vagrant</strong> is a virtual machine management tool which allows molecule to create, start and remove virtual machines in an automated way.
 <strong>VirtualBox</strong> on the other hand is the virtualization provider and handles all the heavy lifting when it comes to virtualizing your hardware.
 See the following table for download pages and version used for the following examples.</p>
@@ -822,7 +804,7 @@ See the following table for download pages and version used for the following ex
 <tr>
 <td>Virtualbox</td>
 <td><a href="https://www.virtualbox.org/wiki/Downloads">Installers</a></td>
-<td>7.1.4</td>
+<td>7.1.6</td>
 </tr>
 <tr>
 <td>Vagrant</td>
@@ -836,7 +818,7 @@ See the following table for download pages and version used for the following ex
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>vagrant<span class="w"> </span>-y
 </span></code></pre></div>
-<p>It seems like the install command on the VirtualBox website for RedHat based system got a typo in it - at least I needed to change it to the one below to make it work.</p>
+<p>The provided key file command for RPM-based Linux distributions on the VirtualBox website didn't work for me - So I changed it to the one below to make it work.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">apt-get</label><label for="__tabbed_1_2">dnf</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -845,16 +827,18 @@ See the following table for download pages and version used for the following ex
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
 <span class="normal"><a href="#__codelineno-4-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>sudo<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &quot;deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib&quot; &gt;&gt; /etc/apt/sources.list&#39;</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>wget<span class="w"> </span>-O-<span class="w"> </span>https://www.virtualbox.org/download/oracle_vbox_2016.asc<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--yes<span class="w"> </span>--output<span class="w"> </span>/usr/share/keyrings/oracle-virtualbox-2016.gpg<span class="w"> </span>--dearmor
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>--refresh
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>virtualbox-7.1<span class="w"> </span>-y
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Install on RedHat-based systems</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
-<span class="normal"><a href="#__codelineno-5-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>wget<span class="w"> </span>-q<span class="w"> </span>https://www.virtualbox.org/download/oracle_vbox_2016.asc<span class="w"> </span>-O-<span class="w"> </span><span class="p">|</span><span class="w"> </span>rpm<span class="w"> </span>--import<span class="w"> </span>oracle_vbox_2016.asc
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>update
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>virtualbox-7.1<span class="w"> </span>-y
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>wget<span class="w"> </span>-q<span class="w"> </span>https://www.virtualbox.org/download/oracle_vbox_2016.asc<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>rpm<span class="w"> </span>--import<span class="w"> </span>oracle_vbox_2016.asc
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>config-manager<span class="w"> </span>--add-repo<span class="o">=</span>https://download.virtualbox.org/virtualbox/rpm/el/virtualbox.repo
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>update
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>VirtualBox-7.1<span class="w"> </span>-y
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -866,8 +850,9 @@ See the following table for download pages and version used for the following ex
 </span></code></pre></div></td></tr></table></div>
 <h2 id="prepare-development-environment">Prepare development environment</h2>
 <hr />
-<p>While I was trying to understand molecule I came across many guides mentioning the command <code>molecule role init</code>.
-This one doesn't exist anymore since version <a href="https://github.com/ansible/molecule/releases/tag/v6.0.0">6.0.0</a> - it was removed intentional to get rid of the <a href="https://github.com/ansible/galaxy">Ansible-Galaxy</a> dependency. By now you simply use the <code>role init</code> command to initialize an Ansible role and initialize a molecule scenario from within the role afterwards.</p>
+<p>Initially I came across many guides mentioning the command <code>molecule role init</code>.
+This one doesn't exist anymore since version <a href="https://github.com/ansible/molecule/releases/tag/v6.0.0">6.0.0</a> - it was removed intentional to get rid of the <a href="https://github.com/ansible/galaxy">Ansible-Galaxy</a> dependency.
+By now you simply use the <code>ansible-galaxy role init</code> command to initialize an Ansible role and initialize a molecule scenario from within the role afterwards.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ansible-galaxy<span class="w"> </span>role<span class="w"> </span>init<span class="w"> </span>example
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd</span><span class="w"> </span>example
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>molecule<span class="w"> </span>init<span class="w"> </span>scenario
@@ -912,8 +897,8 @@ Now you got a "molecule" directory inside the role containing a bunch of default
 </span></code></pre></div>
 <p>This happens due to molecule running a <a href="https://ansible.readthedocs.io/projects/molecule/configuration/#role-name-check">role name-check</a> by default.
 As stated in the documentation you can either disable the check or just add the <code>role_name</code> and <code>namespace</code> to the <code>meta/main.yml</code> file.</p>
-<p>Now running <code>molecule create</code> should, while throwing a bunch of warnings, already work.
-Running <code>molecule list</code> should now show this table.</p>
+<p>Running <code>molecule create</code> after adding these should, while throwing a bunch of warnings, already work.
+Running <code>molecule list</code> should now show a table similar to this one.</p>
 <table>
 <thead>
 <tr>
@@ -940,11 +925,12 @@ Running <code>molecule list</code> should now show this table.</p>
 As the title suggests we will use Vagrant as driver with VirtualBox as a provider in this example.
 So run <code>molecule destroy</code> to remove that default instance again.
 If you run <code>molecule drivers</code> you should see a list of installed drivers including <code>vagrant</code>.
+In case vagrant  is missing, please check again if you installed all <a href="#requirements">requirements</a>, including the Vagrant plugin.
 Take a look at the <a href="https://github.com/ansible-community/molecule-plugins/blob/main/README.md">molecule-plugins repository</a> for additional information</p>
 <h3 id="cleaning-up">Cleaning up</h3>
-<p>Molecule stores all instance related data in a so called <em>ephermal directory</em> and removes it when running <code>molecule reset</code>.
-It's placed at <code>~/.cache/molecule/&lt;role-name&gt;/&lt;scenario-name&gt;</code> by default and usually gets displayed during instance creation @@TODO check instance creation output. 
-Running <code>molecule reset</code> might result in a python-traceback related to docker on RHEL-systems but will still work and remove the directory as expected.</p>
+<p>Molecule stores all instance-related data in a so called <em>ephermal directory</em> and removes it when running <code>molecule reset</code>.
+It's placed at <code>~/.cache/molecule/&lt;role-name&gt;/&lt;scenario-name&gt;</code> by default.
+Running <code>molecule reset</code> might result in a python-traceback in some versions of molecule-plugins before version <a href="https://github.com/ansible-community/molecule-plugins/releases/tag/v23.6.0">v23.6.0</a>, which is related to docker on RHEL-systems but will still work and remove the directory as expected.</p>
 <details class="warning">
 <summary>Python traceback explanation for <code>molecule reset</code></summary>
 <p>Indicates docker and or the python module isn't installed on your system, see <a href="https://github.com/ansible-community/molecule-plugins/issues/166">#166</a>
@@ -996,8 +982,8 @@ VirtualBox sets up two virtual networks  by default.</p>
 To get around this we just assign a static address from the host-only network.</p>
 </details>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>molecule<span class="w"> </span>init<span class="w"> </span>scenario<span class="w"> </span>default<span class="w"> </span>--driver-name<span class="w"> </span>vagrant<span class="w"> </span>--provisioner-name<span class="w"> </span>ansible
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>cp<span class="w"> </span>~/.venv/ansible_env/lib/python<span class="si">${</span><span class="p">{ env.PYTHON_VERSION </span><span class="si">}</span><span class="o">}</span>/site-packages/molecule_plugins/vagrant/playbooks/create.yml<span class="w"> </span>molecule/default/create.yml
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>cp<span class="w"> </span>~/.venv/ansible_env/lib/python<span class="si">${</span><span class="p">{ env.PYTHON_VERSION </span><span class="si">}</span><span class="o">}</span>/site-packages/molecule_plugins/vagrant/playbooks/destroy.yml<span class="w"> </span>molecule/default/destroy.yml
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>cp<span class="w"> </span>~/.venv/ansible_env/lib/python3.12/site-packages/molecule_plugins/vagrant/playbooks/create.yml<span class="w"> </span>molecule/default/create.yml
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>cp<span class="w"> </span>~/.venv/ansible_env/lib/python3.12/site-packages/molecule_plugins/vagrant/playbooks/destroy.yml<span class="w"> </span>molecule/default/destroy.yml
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>mv<span class="w"> </span>requirements.yml<span class="w"> </span>molecule/default/requirements.yml
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>mv<span class="w"> </span>molecule.yml<span class="w"> </span>molecule/default/molecule.yml
 </span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>mv<span class="w"> </span>converge.yml<span class="w"> </span>molecule/default/converge.yml
@@ -1013,8 +999,9 @@ Line 6: Same goes for the <code>converge.yml</code> playbook
 Line 7: Same goes for the <code>verify.yml</code> playbook</p>
 <p>Running <code>molecule create</code> and <code>molecule list</code> when it's done should now display a vagrant instance.</p>
 <h3 id="access-vagrant-instance">Access Vagrant Instance</h3>
-<p>Accessing an instance is supposed to be done by running <code>molecule login</code>, this is currently not working due to a <a href="https://github.com/ansible-community/molecule-plugins/issues/239">bug</a> and should be resolved with the next release.
-In the meantime you can run <code>vagrant global-status</code> to get the vagrant instance IDs and <code>vagrant ssh &lt;id&gt;</code> to log into one of the VMs displayed. Afterwards just type <code>exit</code> to drop out of the instance again.</p>
+<p>Accessing an instance is supposed to be done by running <code>molecule login</code>, this might not work correctly for versions before <a href="https://github.com/ansible-community/molecule-plugins/releases/tag/v23.6.0">v23.6.0</a> due to a <a href="https://github.com/ansible-community/molecule-plugins/issues/239">bug</a>.
+If you are using a version &gt;= v23.6.0 this should work right away.
+If you encounter this issue you can run <code>vagrant global-status</code> to get the vagrant instance IDs and <code>vagrant ssh &lt;id&gt;</code> to log into one of the VMs displayed. Afterwards just type <code>exit</code> to drop out of the instance again.</p>
 <h2 id="provision-a-service">Provision a service</h2>
 <hr />
 <p>After setting up this vagrant instance successfully it is now time to make it do something using Ansible as its provisioner. We will use these tasks so set up an Apache web-server.
@@ -1111,12 +1098,11 @@ Take a look now at these test tasks which should be self-explanatory due to thei
 </span></code></pre></div>
 <p>Place these tasks into a file called <code>tests.yml</code> in the tasks directory to make them easily accessible.
 Now you should be able to run <code>molecule verify</code> to have these tests run against the VM.</p>
-<h2 id="vagrant">Vagrant</h2>
-<p>Explain what gets saved where and how does the ephemermal directory work</p>
-<p>@@TODO Location of ephermal directory might have changed according to <a href="https://github.com/ansible/molecule/releases/tag/v25.2.0">release notes</a></p>
 <p>@@TODO add user/super-user prefix to commands</p>
 <h2 id="wrap-up">Wrap-Up</h2>
 <hr />
+<p>Now you got a basic functional setup to implement an Ansible role and test it in a automated and easy to use way against VirtualBox virtual Machines.
+This kind of setup is also quite extensible with additional automations and convenience features as I'll show you in the following articles of this series.</p>
 
 
 
