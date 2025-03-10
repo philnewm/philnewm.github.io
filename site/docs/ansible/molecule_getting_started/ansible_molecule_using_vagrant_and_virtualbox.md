@@ -38,7 +38,7 @@ Here just the example install command for Ubuntu22.04
 
 > [!tip] Creating a [python virtual environment](https://realpython.com/python-virtual-environments-a-primer/) for Ansible first is highly recommended.
 
-```shell linenums='1' title=Create virtual environment
+```shell linenums="1" title="Create virtual environment"
 python3.12 -m venv ~/.venv/ansible_env
 source ~/.venv/ansible_env/bin/activate
 ```
@@ -64,7 +64,7 @@ docker==7.1.0
 
 Now you can run `upgrade pip` and install the requirements.
 
-```shell linenums='1' title=Install requirements
+```shell linenums="1" title="Install requirements"
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
@@ -82,7 +82,7 @@ See the following table for download pages and version used for the following ex
 | Virtualbox | [Installers](https://www.virtualbox.org/wiki/Downloads)             | 7.1.6             |
 | Vagrant    | [Install commands](https://developer.hashicorp.com/vagrant/install) | 2.4.3             |
 
-```shell linenums='1' title=Install vagrant on debian-based systems
+```shell linenums="1" title="Install vagrant on debian-based systems"
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt-get update
@@ -123,7 +123,7 @@ Initially I came across many guides mentioning the command `molecule role init`.
 This one doesn't exist anymore since version [6.0.0](https://github.com/ansible/molecule/releases/tag/v6.0.0) - it was removed intentional to get rid of the [Ansible-Galaxy](https://github.com/ansible/galaxy) dependency.
 By now you simply use the `ansible-galaxy role init` command to initialize an Ansible role and initialize a molecule scenario from within the role afterwards.
 
-```shell linenums='1' title=Setup role and molecule scenario
+```shell linenums="1" title="Setup role and molecule scenario"
 ansible-galaxy role init example
 cd example
 molecule init scenario
@@ -252,7 +252,7 @@ You can find some explanation of all these settings in the [Ansible molecule doc
 > To get around this we just assign a static address from the host-only network.
 >
 
-```shell linenums='1' title=Initialize vagrant scenario
+```shell linenums="1" title="Initialize vagrant scenario"
 molecule init scenario default --driver-name vagrant --provisioner-name ansible
 cp ~/.venv/ansible_env/lib/python3.12/site-packages/molecule_plugins/vagrant/playbooks/create.yml molecule/default/create.yml
 cp ~/.venv/ansible_env/lib/python3.12/site-packages/molecule_plugins/vagrant/playbooks/destroy.yml molecule/default/destroy.yml
