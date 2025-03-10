@@ -50,7 +50,7 @@ At the time of writing there seems to be a [bug](https://github.com/ansible-comm
 That's why we go for the versions listed here since they seem to work fine together.
 Create a `requirements.txt` file containing these lines:
 
-```shell linenums="1" title="requirements.txt
+```shell linenums="1" title="requirements.txt"
 ansible==11.3.0
 molecule==25.1.0
 molecule-plugins==23.7.0
@@ -206,7 +206,7 @@ Running `molecule reset` might result in a python-traceback in some versions of 
 
 ### Vagrant Instance
 
-```yaml linenums="1" title="molecule.yml
+```yaml linenums="1" title="molecule.yml"
 ---
 
 driver:
@@ -281,7 +281,7 @@ If you encounter this issue you can run `vagrant global-status` to get the vagra
 After setting up this vagrant instance successfully it is now time to make it do something using Ansible as its provisioner. We will use these tasks so set up an Apache web-server.
 This is just a very basic example for demonstration.
 
-```yaml linenums="1" title="tasks.yml
+```yaml linenums="1" title="tasks.yml"
 ---
 
 - name: Gather facts
@@ -343,7 +343,7 @@ Even tho this is nice, testing the functionality of this web-server manually isn
 We will use [Ansible for testing](https://ansible.readthedocs.io/projects/molecule/configuration/?h=#molecule.verifier.ansible.Ansible) as well to stay with the default and to keep it simple. Another popular option for molecule testing is [testinfra](https://ansible.readthedocs.io/projects/molecule/configuration/?h=#molecule.verifier.testinfra.Testinfra)
 Take a look now at these test tasks which should be self-explanatory due to their names.
 
-```yaml linenums="1" title="tests.yml
+```yaml linenums="1" title="tests.yml"
 ---
 
 - name: Gather package facts
