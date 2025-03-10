@@ -230,7 +230,6 @@ provisioner:
   config_options:
     defaults:
       stdout_callback: debug
-      callbacks_enabled: ansible.posix.profile_tasks
     env:
       ANSIBLE_FORCE_COLOR: "true"
 verifier:
@@ -256,7 +255,6 @@ You can find some explanation of all these settings in the [Ansible molecule doc
 molecule init scenario default --driver-name vagrant --provisioner-name ansible
 cp ~/.venv/ansible_env/lib/python3.12/site-packages/molecule_plugins/vagrant/playbooks/create.yml molecule/default/create.yml
 cp ~/.venv/ansible_env/lib/python3.12/site-packages/molecule_plugins/vagrant/playbooks/destroy.yml molecule/default/destroy.yml
-mv requirements.yml molecule/default/requirements.yml
 mv molecule.yml molecule/default/molecule.yml
 mv converge.yml molecule/default/converge.yml
 mv verify.yml molecule/default/verify.yml
