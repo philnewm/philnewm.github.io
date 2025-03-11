@@ -923,10 +923,10 @@
 <h2 id="intro">Intro</h2>
 <hr />
 <p>This article is intended as a guide to set up Ansible Molecule for testing Ansible roles by running them against virtual machines. These virtual machines will be controlled by Vagrant using VirtualBox as provider.
-The code in this guide was developed and tested on AlmaLinux9 and Ubuntu22.04 for the software versions mentioned in <a href="#requirements">Requirements</a></p>
+The code in this guide was developed and tested on AlmaLinux9 and Ubuntu22.04 for the software versions mentioned in <a href="#requirements">Requirements</a>.</p>
+<p>All static files used throughout this guide can be found <a href="https://github.com/philnewm/blog-articles/tree/draft/ansible/molecule_getting_started/resources">here</a></p>
 <h2 id="requirements">Requirements</h2>
 <hr />
-<p>@@TODO note where to get reference files</p>
 <h3 id="system">System</h3>
 <p>Since we will use <em>VirtualBox</em> virtual Machines in this guide it's required for your system to have virtualization enabled in your mainboard's BIOS or UEFI.
 Check this <a href="https://helpdeskgeek.com/how-to/how-to-enable-virtualization-in-bios-for-intel-and-amd/">article</a> for further details</p>
@@ -936,7 +936,7 @@ To follow this <a href="https://ultahost.com/knowledge-base/install-ansible-on-w
 It does however support remote controlling <a href="https://docs.ansible.com/ansible/latest/os_guide/intro_windows.html">Windows hosts</a>.</p>
 <h3 id="python">Python</h3>
 <p>You will need python &gt;= 3.10 to install the latest versions of all required python packages.
-Additional the python-venv and python-pip package will be required.
+Additional the <code>python-venv</code> and <code>python-pip</code> packages will be required.
 Here just the example install command for Ubuntu22.04
 <code>sudo apt-get install python3.12 python3.12-venv python3-pip</code></p>
 <div class="admonition tip">
@@ -1391,11 +1391,11 @@ Take a look now at these test tasks which should be self-explanatory due to thei
 </span><span id="__span-13-35"><a id="__codelineno-13-35" name="__codelineno-13-35"></a><span class="nn">...</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Place these tasks into a file called <code>tests.yml</code> in the tasks directory to make them easily accessible.
-Now you should be able to run <code>molecule verify</code> to have these tests run against the VM.</p>
+Now you should be able to run <code>molecule verify</code> to have these tests run against the virtual machine.</p>
 <p>@@TODO add user/super-user prefix to commands</p>
 <h2 id="wrap-up">Wrap-Up</h2>
 <hr />
-<p>Now you got a basic functional setup to implement an Ansible role and test it in a automated and easy to use way against VirtualBox virtual Machines.
+<p>Now you got a basic functional setup to implement an Ansible role and test it in an automated and easy to use way against VirtualBox virtual machines.
 This kind of setup is also quite extensible with additional automations and convenience features as I'll show you in the following articles of this series.</p>
 
 
@@ -1417,7 +1417,7 @@ This kind of setup is also quite extensible with additional automations and conv
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 10, 2025 21:19:20">March 10, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 11, 2025 20:07:45">March 11, 2025</span>
   </span>
 
     
