@@ -1215,7 +1215,7 @@ Next we copy the default <code>create.yml</code> and <code>destroy.yml</code> fi
 Now replace the molecule config file <code>molecule.yml</code> as well as the <code>converge.yml</code> and <code>verify.yml</code> with the provided ones which use AlmaLinux9. - Get other vagrant boxes on <a href="https://portal.cloud.hashicorp.com/vagrant/discover/almalinux/9">vagrant cloud</a></p>
 <p>Running <code>molecule create</code> and <code>molecule list</code> when it's done should now display a vagrant instance.</p>
 <h3 id="access-vagrant-instance">Access Vagrant Instance</h3>
-<p>Accessing an instance is supposed to be done by running <code>molecule login</code>, this might not work correctly for versions before <a href="https://github.com/ansible-community/molecule-plugins/releases/tag/v23.6.0">v23.6.0</a> due to a <a href="https://github.com/ansible-community/molecule-plugins/issues/239">bug</a>.
+<p>Accessing an instance is supposed to be done by running <code>molecule login --host &lt;hostname&gt;</code>, this might not work correctly for molecule versions before <a href="https://github.com/ansible-community/molecule-plugins/releases/tag/v23.6.0">v23.6.0</a> due to a <a href="https://github.com/ansible-community/molecule-plugins/issues/239">bug</a>.
 If you are using a version &gt;= v23.6.0 this should work right away.
 If you encounter this issue you can run <code>vagrant global-status</code> to get the vagrant instance IDs and <code>vagrant ssh &lt;id&gt;</code> to log into one of the VMs displayed. Afterwards just type <code>exit</code> to drop out of the instance again.</p>
 <h2 id="provision-a-service">Provision a service</h2>
@@ -1418,7 +1418,7 @@ This kind of setup is also quite extensible with additional automations and conv
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 12, 2025 20:07:30">March 12, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 12, 2025 20:21:02">March 12, 2025</span>
   </span>
 
     
