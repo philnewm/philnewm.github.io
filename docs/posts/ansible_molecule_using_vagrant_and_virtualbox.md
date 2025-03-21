@@ -1,9 +1,17 @@
 ---
+date:
+  created: 2025-03-20
+  updated: 2025-03-21
 tags:
   - ansible
   - molecule
   - automation
-  - blog
+categories:
+  - Infrastructure
+draft: False
+authors:
+  - philipp
+slug: molecule-start
 description: Set up basic CI for Ansible using Molecule
 ---
 # Getting started with Molecule
@@ -13,6 +21,9 @@ description: Set up basic CI for Ansible using Molecule
 ---
 
 This article is intended as a guide to set up Ansible Molecule for testing Ansible roles by running them against virtual machines. These virtual machines will be controlled by Vagrant using VirtualBox as provider.
+
+<!-- more -->
+
 The code in this guide was developed and tested on AlmaLinux9 and Ubuntu22.04 for the software versions mentioned in [Requirements](#requirements)
 
 ## Requirements

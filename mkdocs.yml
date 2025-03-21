@@ -1,0 +1,73 @@
+site_name: Phils Blog
+site_description: A blog for my personal development projects
+site_url: https://philnewm.github.io/
+theme:
+  name: material
+  font:
+    text: Merriweather Sans
+    code: Red Hat Mono
+  icon:
+    logo: fontawesome/regular/message  # expects .svg
+  favicon: assets/with_colors_02.png  # expects .ico
+  features:
+    - navigation.footer
+    - content.code.copy
+    - content.code.select
+  palette:
+    # Dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+      primary: deep purple
+      accent: deep orange
+    # Light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+      primary: deep purple
+      accent: cyan
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https;//github.com/philnewm
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/philipp-neumann-435140212/
+
+hooks:
+  - hooks/socialmedia.py
+
+copyright: Copyright © 2021 Philipp Neumann
+plugins:
+  - search
+  - blog:
+      blog_dir: .
+      archive_date_format: mm/yyyy
+      archive_url_date_format: yyyy
+      # categories_allowed:
+      post_url_format: "{slug}"
+  - tags
+  - obsidian-support
+  # - git-revision-date-localized
+  - rss:
+      match_path: "posts/.*"
+      pretty_print: true
+      date_from_meta:
+        as_creation: date.created
+        as_update: date.updated
