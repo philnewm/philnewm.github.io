@@ -2,18 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://philnewm.github.io/</loc>
-         <lastmod>2025-03-12</lastmod>
+         <lastmod>2025-03-21</lastmod>
     </url>
     <url>
-         <loc>https://philnewm.github.io/ansible/molecule_getting_started/ansible_molecule_using_vagrant_and_virtualbox/</loc>
-         <lastmod>2025-03-12</lastmod>
+         <loc>https://philnewm.github.io/tags/</loc>
+         <lastmod>2025-03-21</lastmod>
     </url>
     <url>
          <loc>https://philnewm.github.io/ansible/some_actions/ci_in_github_actions/</loc>
-         <lastmod>2025-03-12</lastmod>
+         <lastmod>2025-03-21</lastmod>
     </url>
     <url>
-         <loc>https://philnewm.github.io/site/docs/</loc>
-         <lastmod>2025-03-12</lastmod>
+         <loc>https://philnewm.github.io/molecule-start/</loc>
+         <lastmod>2025-03-21</lastmod>
+    </url>
+    <url>
+         <loc>https://philnewm.github.io/archive/2025/</loc>
+         <lastmod>2025-03-21</lastmod>
+    </url>
+    <url>
+         <loc>https://philnewm.github.io/category/infrastructure/</loc>
+         <lastmod>2025-03-21</lastmod>
     </url>
 </urlset>

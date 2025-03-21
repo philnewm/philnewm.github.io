@@ -1,1 +1,26 @@
-{"version": "https://jsonfeed.org/version/1", "title": "Phils Blog", "home_page_url": "https://philnewm.github.io/", "feed_url": "https://philnewm.github.io/feed_json_created.json", "description": "A blog for my personal development projects", "icon": null, "authors": [], "language": "en", "items": [{"id": "https://philnewm.github.io/site/docs/", "url": "https://philnewm.github.io/site/docs/", "title": "Blog", "content_html": "<h1>Blog</h1>", "image": null, "date_published": "2025-03-09T20:28:28+00:00", "authors": [], "tags": null}]}
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Phils Blog",
+    "home_page_url": "https://philnewm.github.io/",
+    "feed_url": "https://philnewm.github.io/feed_json_created.json",
+    "description": "A blog for my personal development projects",
+    "icon": null,
+    "authors": [],
+    "language": "en",
+    "items": [
+        {
+            "id": "https://philnewm.github.io/molecule-start/",
+            "url": "https://philnewm.github.io/molecule-start/",
+            "title": "Getting started with Molecule",
+            "content_html": "Set up basic CI for Ansible using Molecule",
+            "image": null,
+            "date_published": "2025-03-20T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Phil Newm"
+                }
+            ],
+            "tags": null
+        }
+    ]
+}
