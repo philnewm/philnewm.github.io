@@ -58,7 +58,6 @@ plugins:
       post_url_format: "{slug}"
   - tags
   - obsidian-support
-  # - git-revision-date-localized
   - rss:
       match_path: "posts/.*"
       pretty_print: true

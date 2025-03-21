@@ -6,4 +6,4 @@ mkdocs-rss-plugin
 mkdocs-obsidian-support-plugin
 mkdocs-rss-plugin
 mkdocs-git-revision-date-localized-plugin
-mkdocs-git-committers-plugin
+mkdocs-git-committers-plugin-2
