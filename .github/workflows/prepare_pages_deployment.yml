@@ -37,6 +37,6 @@
           - name: Start deployment process
             run: |
               mkdocs gh-deploy --config-file mkdocs.yml --remote-branch gh-pages --message "[Automated] deploy pages" --force
-            working-directory:  ./site
+            working-directory:  ${{ github.workspace }}
     
 ...
