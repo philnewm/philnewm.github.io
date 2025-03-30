@@ -7,20 +7,5 @@
     "icon": null,
     "authors": [],
     "language": "en",
-    "items": [
-        {
-            "id": "https://philnewm.github.io/molecule-start/",
-            "url": "https://philnewm.github.io/molecule-start/",
-            "title": "Getting started with Molecule",
-            "content_html": "Set up basic CI for Ansible using Molecule",
-            "image": null,
-            "date_modified": "2025-03-30T00:00:00+00:00",
-            "authors": [
-                {
-                    "name": "Phil Newm"
-                }
-            ],
-            "tags": null
-        }
-    ]
+    "items": []
 }
