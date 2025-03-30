@@ -6,33 +6,31 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A blog for my personal development projects">
+        <meta name="description" content="Set up basic CI for Ansible using Molecule">
       
       
       
-        <link rel="canonical" href="https://philnewm.github.io/">
+        <link rel="canonical" href="https://philnewm.github.io/molecule-start/">
       
       
       
-        <link rel="next" href="tags/">
       
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../feed_rss_updated.xml">
       
-        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="feed_rss_created.xml">
-        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="feed_rss_updated.xml">
-      
-      <link rel="icon" href="assets/with_colors_02.png">
+      <link rel="icon" href="../assets/with_colors_02.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.10">
     
     
       
-        <title>Phils Blog</title>
+        <title>Getting started with Molecule - Phils Blog</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -51,7 +49,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -77,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#main" class="md-skip">
+        <a href="#getting-started-with-molecule" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +91,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Phils Blog" class="md-header__button md-logo" aria-label="Phils Blog" data-md-component="logo">
+    <a href=".." title="Phils Blog" class="md-header__button md-logo" aria-label="Phils Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M160 368c26.5 0 48 21.5 48 48v16l72.5-54.4c8.3-6.2 18.4-9.6 28.8-9.6H448c8.8 0 16-7.2 16-16V64c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16zm48 124-.2.2-5.1 3.8-17.1 12.8c-4.8 3.6-11.3 4.2-16.8 1.5s-8.8-8.2-8.8-14.3v-80H64c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0h384c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H309.3z"/></svg>
@@ -113,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Main
+              Getting started with Molecule
             
           </span>
         </div>
@@ -205,7 +203,9 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -214,7 +214,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Phils Blog" class="md-nav__button md-logo" aria-label="Phils Blog" data-md-component="logo">
+    <a href=".." title="Phils Blog" class="md-nav__button md-logo" aria-label="Phils Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M160 368c26.5 0 48 21.5 48 48v16l72.5-54.4c8.3-6.2 18.4-9.6 28.8-9.6H448c8.8 0 16-7.2 16-16V64c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16zm48 124-.2.2-5.1 3.8-17.1 12.8c-4.8 3.6-11.3 4.2-16.8 1.5s-8.8-8.2-8.8-14.3v-80H64c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0h384c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H309.3z"/></svg>
@@ -233,19 +233,10 @@
   
   
     
-      
-    
   
   
     <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -256,7 +247,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -268,7 +258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tags/" class="md-nav__link">
+      <a href="../tags/" class="md-nav__link">
         
   
   
@@ -366,7 +356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ansible/some_actions/ci_in_github_actions/" class="md-nav__link">
+      <a href="../ansible/some_actions/ci_in_github_actions/" class="md-nav__link">
         
   
   
@@ -444,7 +434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="archive/2025/" class="md-nav__link">
+      <a href="../archive/2025/" class="md-nav__link">
         
   
   
@@ -514,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="category/infrastructure/" class="md-nav__link">
+      <a href="../category/infrastructure/" class="md-nav__link">
         
   
   
@@ -545,6 +535,8 @@
             
             
               
+                
+              
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -557,6 +549,161 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system" class="md-nav__link">
+    <span class="md-ellipsis">
+      System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare development environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instance-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instance Creation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instance Creation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Instance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleaning-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cleaning up
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vagrant-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vagrant Instance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-vagrant-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Vagrant Instance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provision-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provision a service
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-vagrant-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Vagrant Instance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wrap-Up
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#share-on-socials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Share on Socials
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -564,62 +711,144 @@
             
           
           
-  <div class="md-content" data-md-component="content">
-    <div class="md-content__inner">
-      <header class="md-typeset">
-        <h1 id="main">Main</h1>
-      </header>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://avatars.githubusercontent.com/u/112476663?v=4" alt="Phil Newm">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-03-20 00:00:00+00:00">March 20, 2025</time></li>
-        
-          <li class="md-meta__item">
-            in
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href=".." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
             
-              <a href="category/infrastructure/" class="md-meta__link">infrastructure</a></li>
-        
-        
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/112476663?v=4" alt="Phil Newm">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          <a href="https://github.com/philnewm">Phil Newm</a>
+                        
+                      </strong>
+                      <br>
+                      Developer
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2025-03-20 00:00:00+00:00" class="md-ellipsis">March 20, 2025</time>
+                      </div>
+                    </li>
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69zm4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67zM5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2zm11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85"/></svg>
+                          <time datetime="2025-03-30 00:00:00+00:00" class="md-ellipsis">March 30, 2025</time>
+                        </div>
+                      </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../category/infrastructure/">infrastructure</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              9 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
           
-          <li class="md-meta__item">
-            
-              9 min read
-            
-          </li>
-        
-      </ul>
-      
+        </div>
+      </div>
     </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="getting-started-with-molecule"><a class="toclink" href="molecule-start/">Getting started with Molecule</a></h2>
-<h3 id="intro"><a class="toclink" href="molecule-start/#intro">Intro</a></h3>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+        <span class="md-tag">ansible</span>
+      
+    
+      
+      
+      
+        <span class="md-tag">automation</span>
+      
+    
+      
+      
+      
+        <span class="md-tag">molecule</span>
+      
+    
+  </nav>
+
+
+
+<h1 id="getting-started-with-molecule">Getting started with Molecule</h1>
+<h2 id="intro">Intro</h2>
 <hr />
 <p>This article is intended as a guide to set up Ansible Molecule for testing Ansible roles by running them against virtual machines. These virtual machines will be controlled by Vagrant using VirtualBox as provider.
-The code in this guide was developed and tested on AlmaLinux9 and Ubuntu22.04 for the software versions mentioned in <a href="molecule-start/#requirements">Requirements</a>.</p>
+The code in this guide was developed and tested on AlmaLinux9 and Ubuntu22.04 for the software versions mentioned in <a href="#requirements">Requirements</a>.</p>
 <p>All static files used throughout this guide can be found <a href="https://github.com/philnewm/blog-articles/tree/draft/ansible/molecule_getting_started/resources">here</a></p>
-<h3 id="requirements"><a class="toclink" href="molecule-start/#requirements">Requirements</a></h3>
+<h2 id="requirements">Requirements</h2>
 <hr />
-<h4 id="system"><a class="toclink" href="molecule-start/#system">System</a></h4>
+<h3 id="system">System</h3>
 <p>Since we will use <em>VirtualBox</em> virtual Machines in this guide it's required for your system to have virtualization enabled in your mainboard's BIOS or UEFI.
 Check this <a href="https://helpdeskgeek.com/how-to/how-to-enable-virtualization-in-bios-for-intel-and-amd/">article</a> for further details</p>
 <p>This guide is intended to be followed on a Linux system.
 This article assumes you got a basic understanding of Ansible and how to operate within the Linux terminal.
 To follow this <a href="https://ultahost.com/knowledge-base/install-ansible-on-windows/">guide on a Windows system</a> you will need to use the Windows Subsystem for Linux (WSL) since Ansible is not supported on Windows.
 It does however support remote controlling <a href="https://docs.ansible.com/ansible/latest/os_guide/intro_windows.html">Windows hosts</a>.</p>
-<h4 id="python"><a class="toclink" href="molecule-start/#python">Python</a></h4>
+<h3 id="python">Python</h3>
 <p>You will need python &gt;= 3.10 to install the latest versions of all required python packages.
 Additional the <code>python-venv</code> and <code>python-pip</code> packages will be required.
 Here just the example install command for Ubuntu22.04
@@ -656,7 +885,7 @@ A fix for this one is already merged, see <a href="https://github.com/ansible-co
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </code></pre></div></td></tr></table></div>
-<h4 id="tools"><a class="toclink" href="molecule-start/#tools">Tools</a></h4>
+<h3 id="tools">Tools</h3>
 <p>As the title suggests you also need <em>Virtualbox</em> and <em>Vagrant</em> installed to follow along.</p>
 <p><strong>Vagrant</strong> is a virtual machine management tool which allows molecule to create, start and remove virtual machines in an automated way.
 <strong>VirtualBox</strong> on the other hand is the virtualization provider and handles all the heavy lifting when it comes to virtualizing your hardware.
@@ -720,7 +949,7 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> <
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>VBoxManage<span class="w"> </span>--version
 vagrant<span class="w"> </span>--version
 </code></pre></div></td></tr></table></div>
-<h3 id="prepare-development-environment"><a class="toclink" href="molecule-start/#prepare-development-environment">Prepare development environment</a></h3>
+<h2 id="prepare-development-environment">Prepare development environment</h2>
 <hr />
 <p>Initially I came across many guides mentioning the command <code>molecule role init</code>.
 This one doesn't exist anymore since version <a href="https://github.com/ansible/molecule/releases/tag/v6.0.0">6.0.0</a> - it was removed intentional to get rid of the <a href="https://github.com/ansible/galaxy">Ansible-Galaxy</a> dependency.
@@ -758,9 +987,9 @@ Now you got a "molecule" directory inside the role containing a bunch of default
  ┗ 📜README.md
 </code></pre></div>
 <p>For details about how each file and directory inside this role structure is supposed to be used see the <a href="https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#role-directory-structure">Ansible documentation</a></p>
-<h3 id="instance-creation"><a class="toclink" href="molecule-start/#instance-creation">Instance Creation</a></h3>
+<h2 id="instance-creation">Instance Creation</h2>
 <hr />
-<h4 id="default-instance"><a class="toclink" href="molecule-start/#default-instance">Default Instance</a></h4>
+<h3 id="default-instance">Default Instance</h3>
 <p>Creating a molecule instance is done by running <code>molecule create</code> if you do that right away from the roles root directory you will most likely encounter the following error:</p>
 <div class="highlight"><pre><span></span><code>ERROR    Computed fully qualified role name of sample does not follow current galaxy requirements.
 Please edit meta/main.yml and assure we can correctly determine full role name:
@@ -799,9 +1028,9 @@ Running <code>molecule list</code> should now show a table similar to this one.<
 As the title suggests we will use Vagrant as driver with VirtualBox as a provider in this example.
 So run <code>molecule destroy</code> to remove that default instance again.
 If you run <code>molecule drivers</code> you should see a list of installed drivers including <code>vagrant</code>.
-In case vagrant is missing, please check again if you installed all <a href="molecule-start/#requirements">requirements</a>, including the Vagrant plugin.
+In case vagrant is missing, please check again if you installed all <a href="#requirements">requirements</a>, including the Vagrant plugin.
 Take a look at the <a href="https://github.com/ansible-community/molecule-plugins/blob/main/README.md">molecule-plugins repository</a> for additional information</p>
-<h4 id="cleaning-up"><a class="toclink" href="molecule-start/#cleaning-up">Cleaning up</a></h4>
+<h3 id="cleaning-up">Cleaning up</h3>
 <p>Molecule stores all instance-related data in a so called <em>ephermal directory</em> and removes it when running <code>molecule reset</code>.
 It's placed at <code>~/.cache/molecule/&lt;role-name&gt;/&lt;scenario-name&gt;</code> by default.
 Running <code>molecule reset</code> might result in a python-traceback in some versions of molecule-plugins before version <a href="https://github.com/ansible-community/molecule-plugins/releases/tag/v23.6.0">v23.6.0</a>, which is related to docker on RHEL-systems but will still work and remove the directory as expected.</p>
@@ -810,7 +1039,7 @@ Running <code>molecule reset</code> might result in a python-traceback in some v
 <p>Indicates docker and or the python module isn't installed on your system, see <a href="https://github.com/ansible-community/molecule-plugins/issues/166">#166</a>
 Happens e.g. on Almalinux 9 due to podman being the default container service instead of docker and molecule doesn't seem to like this.</p>
 </details>
-<h4 id="vagrant-instance"><a class="toclink" href="molecule-start/#vagrant-instance">Vagrant Instance</a></h4>
+<h3 id="vagrant-instance">Vagrant Instance</h3>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">molecule.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -899,11 +1128,11 @@ mv<span class="w"> </span>verify.yml<span class="w"> </span>molecule/default/ver
 Next we copy the default <code>create.yml</code> and <code>destroy.yml</code> files since the default ones will cause connection issues on start-up.
 Now replace the molecule config file <code>molecule.yml</code> as well as the <code>converge.yml</code> and <code>verify.yml</code> with the provided ones which use AlmaLinux9. - Get other vagrant boxes on <a href="https://portal.cloud.hashicorp.com/vagrant/discover/almalinux/9">vagrant cloud</a></p>
 <p>Running <code>molecule create</code> and <code>molecule list</code> when it's done should now display a vagrant instance.</p>
-<h4 id="access-vagrant-instance"><a class="toclink" href="molecule-start/#access-vagrant-instance">Access Vagrant Instance</a></h4>
+<h3 id="access-vagrant-instance">Access Vagrant Instance</h3>
 <p>Accessing an instance is supposed to be done by running <code>molecule login --host &lt;hostname&gt;</code>, this might not work correctly for molecule versions before <a href="https://github.com/ansible-community/molecule-plugins/releases/tag/v23.6.0">v23.6.0</a> due to a <a href="https://github.com/ansible-community/molecule-plugins/issues/239">bug</a>.
 If you are using a version &gt;= v23.6.0 this should work right away.
 If you encounter this issue you can run <code>vagrant global-status</code> to get the vagrant instance IDs and <code>vagrant ssh &lt;id&gt;</code> to log into one of the VMs displayed. Afterwards just type <code>exit</code> to drop out of the instance again.</p>
-<h3 id="provision-a-service"><a class="toclink" href="molecule-start/#provision-a-service">Provision a service</a></h3>
+<h2 id="provision-a-service">Provision a service</h2>
 <hr />
 <p>After setting up this vagrant instance successfully it is now time to make it do something using Ansible as its provisioner. We will use these tasks so set up an Apache web-server.
 This is just a very basic example for demonstration.</p>
@@ -1001,7 +1230,7 @@ This is just a very basic example for demonstration.</p>
 <p>Next run <code>molecule converge</code> to run these tasks against the VirtualBox VM.
 After this ran successfully you should be able to just copy the IP address displayed by the debug task e.g. <code>192.168.56.10</code> to your browser and see the default Apache web-server page right away.</p>
 <p>Even tho this is nice, testing the functionality of this web-server manually isn't quite a scalable approach. It's time to set up automated testing for this role.</p>
-<h3 id="test-vagrant-instance"><a class="toclink" href="molecule-start/#test-vagrant-instance">Test Vagrant Instance</a></h3>
+<h2 id="test-vagrant-instance">Test Vagrant Instance</h2>
 <hr />
 <p>We will use <a href="https://ansible.readthedocs.io/projects/molecule/configuration/?h=#molecule.verifier.ansible.Ansible">Ansible for testing</a> as well to stay with the default and to keep it simple. Another popular option for molecule testing is <a href="https://ansible.readthedocs.io/projects/molecule/configuration/?h=#molecule.verifier.testinfra.Testinfra">testinfra</a>
 Take a look now at these test tasks which should be self-explanatory due to their names.</p>
@@ -1077,34 +1306,108 @@ Take a look now at these test tasks which should be self-explanatory due to thei
 </code></pre></div></td></tr></table></div>
 <p>Place these tasks into a file called <code>tests.yml</code> in the tasks directory to make them easily accessible.
 Now you should be able to run <code>molecule verify</code> to have these tests run against the virtual machine.</p>
-<h3 id="wrap-up"><a class="toclink" href="molecule-start/#wrap-up">Wrap-Up</a></h3>
+<h2 id="wrap-up">Wrap-Up</h2>
 <hr />
 <p>Well done, at this point you should have a basic setup to implement an Ansible role and test it in an automated and easy to use way against VirtualBox virtual machines.
 This kind of setup is also quite extensible with additional logic and convenience features as I'll show you in the following articles of this series.</p>
 <p>Thanks for reading and stay tuned.</p>
 <div style="text-align: center;">
-<h3 id="share-on-socials" style="font-weight: bold; text-decoration: underline; padding: 10px; border-radius: 5px;"><a class="toclink" href="molecule-start/#share-on-socials">
+<h2 id="share-on-socials" style="font-weight: bold; text-decoration: underline; padding: 10px; border-radius: 5px;">
 Share on Socials
-</a></h3>
+</h2>
 <p><a class="md-button" href="https://x.com/intent/tweet?text=Getting%20started%20with%20Molecule%0A&amp;url=https://philnewm.github.io/molecule-start/">Share on <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></span></a>
 <a class="md-button" href="https://www.facebook.com/sharer/sharer.php?u=https://philnewm.github.io/molecule-start/">Share on <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a9 9 0 0 1 1.141.195v3.325a9 9 0 0 0-.653-.036 27 27 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.7 1.7 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647"/></svg></span></a></p>
 </div>
-    
-  </div>
-</article>
-      
-      
-        
-          
 
 
 
-<nav class="md-pagination">
+
+
+
+
   
-</nav>
-        
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
       
-    </div>
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 30, 2025 17:09:04">March 30, 2025</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 22, 2025 20:02:00">January 22, 2025</span>
+  </span>
+
+    
+    
+    
+      
+  <span class="md-source-file__fact">
+    
+      
+  <span class="md-icon" title="Contributors">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>
+  </span>
+  <span>GitHub</span>
+
+    
+    <nav>
+      
+        <a href="https://github.com/philnewm" class="md-author" title="@philnewm">
+          
+          <img src="https://avatars.githubusercontent.com/u/112476663?v=4&size=72" alt="philnewm">
+        </a>
+      
+        <a href="https://github.com/apps/github-actions" class="md-author" title="@github-actions[bot]">
+          
+          <img src="https://avatars.githubusercontent.com/in/15368?v=4&size=72" alt="github-actions[bot]">
+        </a>
+      
+      
+      
+    </nav>
+  </span>
+
+    
+  </aside>
+
+
+
+  
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="philnewm/philnewm.github.io"
+        data-repo-id="R_kgDONnrpRA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONnrpRM4CoVUQ"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+      
+    </article>
   </div>
 
           
@@ -1115,28 +1418,6 @@ Share on Socials
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-        
-          
-          <a href="tags/" class="md-footer__link md-footer__link--next" aria-label="Next: Tags">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Tags
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -1193,10 +1474,10 @@ Share on Socials
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "content.code.copy", "content.code.select"], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "content.code.copy", "content.code.select"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
   </body>

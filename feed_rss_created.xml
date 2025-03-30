@@ -13,8 +13,8 @@
     <language>en</language>
 
     
-    <pubDate>Sun, 30 Mar 2025 16:48:11 -0000</pubDate>
-    <lastBuildDate>Sun, 30 Mar 2025 16:48:11 -0000</lastBuildDate>
+    <pubDate>Sun, 30 Mar 2025 17:11:48 -0000</pubDate>
+    <lastBuildDate>Sun, 30 Mar 2025 17:11:48 -0000</lastBuildDate>
     <ttl>1440</ttl>
 
     
@@ -30,6 +30,25 @@
     
 
     
+    
+    <item>
+      <title>Getting started with Molecule</title>
+      
+      
+        
+      <author>Phil Newm</author>
+        
+      
+      
+      
+      <description>Set up basic CI for Ansible using Molecule</description>
+      <link>https://philnewm.github.io/molecule-start/</link>
+      <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
+      <source url="https://philnewm.github.io/feed_rss_created.xml">Phils Blog</source>
+      
+      <guid isPermaLink="true">https://philnewm.github.io/molecule-start/</guid>
+      
+    </item>
     
   </channel>
 </rss>
