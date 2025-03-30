@@ -14,7 +14,7 @@
             "title": "Getting started with Molecule",
             "content_html": "Set up basic CI for Ansible using Molecule",
             "image": null,
-            "date_modified": "2025-03-21T00:00:00+00:00",
+            "date_modified": "2025-03-30T00:00:00+00:00",
             "authors": [
                 {
                     "name": "Phil Newm"
