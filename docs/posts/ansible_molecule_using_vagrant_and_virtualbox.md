@@ -27,6 +27,8 @@ The code in this guide was developed and tested on AlmaLinux9 and Ubuntu22.04 fo
 
 All static files used throughout this guide can be found [here](https://github.com/philnewm/blog-articles/tree/draft/molecule_getting_started/resources).
 
+<!-- more -->
+
 ## Requirements
 
 ---
