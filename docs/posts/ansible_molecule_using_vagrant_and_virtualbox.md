@@ -1,18 +1,20 @@
 ---
-date:
-  created: 2025-03-20
-  updated: 2025-03-21
+slug: molecule-start
+description: Set up basic CI for Ansible using Molecule
 tags:
   - ansible
   - molecule
   - automation
-categories:
-  - Infrastructure
-draft: False
 authors:
   - philipp
-slug: molecule-start
-description: Set up basic CI for Ansible using Molecule
+date:
+  created: 2025-03-20
+  updated: 2025-03-30
+categories:
+  - infrastructure
+ci: ansible_molecule_getting_started_ci
+devto: true
+draft: false
 ---
 # Getting started with Molecule
 
@@ -21,9 +23,6 @@ description: Set up basic CI for Ansible using Molecule
 ---
 
 This article is intended as a guide to set up Ansible Molecule for testing Ansible roles by running them against virtual machines. These virtual machines will be controlled by Vagrant using VirtualBox as provider.
-
-<!-- more -->
-
 The code in this guide was developed and tested on AlmaLinux9 and Ubuntu22.04 for the software versions mentioned in [Requirements](#requirements).
 
 All static files used throughout this guide can be found [here](https://github.com/philnewm/blog-articles/tree/draft/ansible/molecule_getting_started/resources)
@@ -51,9 +50,14 @@ Here just the example install command for Ubuntu22.04
 
 > [!tip] Creating a [python virtual environment](https://realpython.com/python-virtual-environments-a-primer/) for Ansible first is highly recommended.
 
-```shell linenums="1" title="Create virtual environment"
-python3.12 -m venv ~/.venv/ansible_env
-source ~/.venv/ansible_env/bin/activate
+```reference
+title: "Create virtual environment"
+file: ./.github/workflows/ansible_molecule_getting_started_ci.yml
+start: 41
+end: "+1"
+language: shell
+fold: true
+ln: true
 ```
 
 Next we need a bunch of python packages like Ansible, Molecule and its *Vagrant* plugin.
@@ -63,12 +67,12 @@ At the time of writing there seems to be a [bug](https://github.com/ansible-comm
 That's why we go for the versions listed here since they seem to work fine together.
 Create a `requirements.txt` file containing these lines:
 
-```shell linenums="1" title="requirements.txt"
-ansible==11.3.0
-molecule==25.1.0
-molecule-plugins==23.7.0
-molecule-plugins[vagrant]
-docker==7.1.0
+```reference
+title: "requirements.txt"
+file: molecule_getting_started/resources/requirements.txt
+language: shell
+fold: true
+ln: true
 ```
 
 > [!tip]- docker python packages
@@ -77,9 +81,14 @@ docker==7.1.0
 
 Now you can run `upgrade pip` and install the requirements.
 
-```shell linenums="1" title="Install requirements"
-pip install --upgrade pip
-pip install -r requirements.txt
+```reference
+title: "Install requirements"
+file: ./.github/workflows/ansible_molecule_getting_started_ci.yml
+start: 56
+end: "+1"
+language: shell
+fold: true
+ln: true
 ```
 
 ### Tools
@@ -95,11 +104,14 @@ See the following table for download pages and version used for the following ex
 | Virtualbox | [Installers](https://www.virtualbox.org/wiki/Downloads)             | 7.1.6             |
 | Vagrant    | [Install commands](https://developer.hashicorp.com/vagrant/install) | 2.4.3             |
 
-```shell linenums="1" title="Install vagrant on debian-based systems"
-wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt-get update
-sudo apt-get install vagrant -y
+```reference
+title: "Install vagrant on debian-based systems"
+file: ./.github/workflows/ansible_molecule_getting_started_ci.yml
+start: 76
+end: "+3"
+language: shell
+fold: true
+ln: true
 ```
 
 The provided key file command for RPM-based Linux distributions on the VirtualBox website didn't work for me - So I changed it to the one below to make it work.
@@ -136,10 +148,14 @@ Initially I came across many guides mentioning the command `molecule role init`.
 This one doesn't exist anymore since version [6.0.0](https://github.com/ansible/molecule/releases/tag/v6.0.0) - it was removed intentional to get rid of the [Ansible-Galaxy](https://github.com/ansible/galaxy) dependency.
 By now you simply use the `ansible-galaxy role init` command to initialize an Ansible role and initialize a molecule scenario from within the role afterwards.
 
-```shell linenums="1" title="Setup role and molecule scenario"
-ansible-galaxy role init example
-cd example
-molecule init scenario
+```reference
+title: "Setup role and molecule scenario"
+file: ./.github/workflows/ansible_molecule_getting_started_ci.yml
+start: 87
+end: "+2"
+language: shell
+fold: true
+ln: true
 ```
 
 For now, we'll just go with the *default* scenario to keep it simple.
@@ -219,37 +235,12 @@ Running `molecule reset` might result in a python-traceback in some versions of 
 
 ### Vagrant Instance
 
-```yaml linenums="1" title="molecule.yml"
----
-
-driver:
-  name: vagrant
-  provider:
-    name: virtualbox
-platforms:
-  # Defaults to Alpine Linux in case no box details are provided
-  - name: Alma9
-    box: almalinux/9
-    box_version: "9.5.20241203"
-    memory: 2048
-    cpus: 2
-    interfaces:
-      - auto_config: true
-        network_name: private_network
-        type: "static"
-        ip: "192.168.56.10"
-provisioner:
-  name: ansible
-  config_options:
-    defaults:
-      stdout_callback: debug
-    env:
-      ANSIBLE_FORCE_COLOR: "true"
-verifier:
-  name: ansible
-  enabled: True
-
-...
+```reference
+title: "molecule.yml"
+file: molecule_getting_started/resources/molecule.yml
+language: yaml
+fold: true
+ln: true
 ```
 
 You can find some explanation of all these settings in the [Ansible molecule docs](https://ansible.readthedocs.io/projects/molecule/getting-started/#inspecting-the-moleculeyml)
@@ -264,13 +255,14 @@ You can find some explanation of all these settings in the [Ansible molecule doc
 > To get around this we just assign a static address from the host-only network.
 >
 
-```shell linenums="1" title="Initialize vagrant scenario"
-molecule init scenario default --driver-name vagrant --provisioner-name ansible
-cp ~/.venv/ansible_env/lib/python3.12/site-packages/molecule_plugins/vagrant/playbooks/create.yml molecule/default/create.yml
-cp ~/.venv/ansible_env/lib/python3.12/site-packages/molecule_plugins/vagrant/playbooks/destroy.yml molecule/default/destroy.yml
-mv molecule.yml molecule/default/molecule.yml
-mv converge.yml molecule/default/converge.yml
-mv verify.yml molecule/default/verify.yml
+```reference
+title: "Initialize vagrant scenario"
+file: ./.github/workflows/ansible_molecule_getting_started_ci.yml
+start: 146
+end: "+5"
+language: shell
+fold: true
+ln: true
 ```
 
 Here we begin by initializing a new molecule scenario using flags to explicitly set the driver and provisioner names.
@@ -292,52 +284,12 @@ If you encounter this issue you can run `vagrant global-status` to get the vagra
 After setting up this vagrant instance successfully it is now time to make it do something using Ansible as its provisioner. We will use these tasks so set up an Apache web-server.
 This is just a very basic example for demonstration.
 
-```yaml linenums="1" title="tasks.yml"
----
-
-- name: Gather facts
-  ansible.builtin.gather_facts:
-
-- name: Install Apache web server
-  become: true
-  ansible.builtin.package:
-    name: httpd
-    state: present
-
-- name: Ensure Apache is started and enabled on boot
-  become: true
-  ansible.builtin.service:
-    name: "httpd"
-    state: "started"
-    enabled: true
-
-- name: Create default index.html
-  become: true
-  ansible.builtin.copy:
-    content: |
-      <html>
-      <body>
-        <h1>Welcome to Apache on AlmaLinux!</h1>
-      </body>
-      </html>
-    dest: /var/www/html/index.html
-    owner: root
-    group: root
-    mode: '0644'
-  register: default_page
-
-- name: Restart Apache service
-  become: true
-  when: default_page.changed
-  ansible.builtin.service:
-    name: httpd
-    state: restarted
-
-- name: Display VM IP address
-  ansible.builtin.debug:
-    var: ansible_all_ipv4_addresses
-
-...
+```reference
+title: "tasks.yml"
+file: molecule_getting_started/resources/tasks.yml
+language: yaml
+fold: true
+ln: true
 ```
 
 Now replace the content of `tasks/main.yml` with these yaml tasks.
@@ -354,54 +306,22 @@ Even tho this is nice, testing the functionality of this web-server manually isn
 We will use [Ansible for testing](https://ansible.readthedocs.io/projects/molecule/configuration/?h=#molecule.verifier.ansible.Ansible) as well to stay with the default and to keep it simple. Another popular option for molecule testing is [testinfra](https://ansible.readthedocs.io/projects/molecule/configuration/?h=#molecule.verifier.testinfra.Testinfra)
 Take a look now at these test tasks which should be self-explanatory due to their names.
 
-```yaml linenums="1" title="tests.yml"
----
-
-- name: Gather package facts
-  ansible.builtin.package_facts:
-
-- name: Gather service facts
-  ansible.builtin.service_facts:
-
-- name: Test Apache package is installed
-  ansible.builtin.assert:
-    that:
-      - "'httpd' in ansible_facts.packages"
-    fail_msg: "Apache package 'httpd' is not installed"
-    quiet: true
-
-- name: Test Apache service is running
-  ansible.builtin.assert:
-    that:
-      - ansible_facts.services['httpd.service'].state == 'running'
-    fail_msg: "Apache service is not running"
-    quiet: true
-
-- name: Query Apache default web page
-  ansible.builtin.uri:
-    url: "http://{{ ansible_all_ipv4_addresses[0] }}"
-  register: web_check
-
-- name: Test Apache is reachable
-  ansible.builtin.assert:
-    that:
-      - web_check.status == 200
-    fail_msg: "Web server is not reachable or did not return status code 200"
-    success_msg: "Web server is reachable and returned status code 200"
-
-...
+```reference
+title: "tests.yml"
+file: molecule_getting_started/resources/tests.yml
+language: yaml
+fold: true
+ln: true
 ```
 
 Place these tasks into a file called `tests.yml` in the tasks directory to make them easily accessible.
 Now you should be able to run `molecule verify` to have these tests run against the virtual machine.
 
-@@TODO add user/super-user prefix to commands
-
 ## Wrap-Up
 
-___
+---
 
-Now you got a basic functional setup to implement an Ansible role and test it in an automated and easy to use way against VirtualBox virtual machines.
-This kind of setup is also quite extensible with additional automations and convenience features as I'll show you in the following articles of this series.
+Well done, at this point you should have a basic setup to implement an Ansible role and test it in an automated and easy to use way against VirtualBox virtual machines.
+This kind of setup is also quite extensible with additional logic and convenience features as I'll show you in the following articles of this series.
 
-@@ TODO research what other put here in the end
+Thanks for reading and stay tuned.
