@@ -11,7 +11,7 @@
         {
             "id": "https://philnewm.github.io/molecule-start/",
             "url": "https://philnewm.github.io/molecule-start/",
-            "title": "Getting started with Molecule",
+            "title": "Getting started with Ansible Molecule",
             "content_html": "Set up basic CI for Ansible using Molecule",
             "image": null,
             "date_published": "2025-03-20T00:00:00+00:00",
