@@ -16,7 +16,7 @@ ci: ansible_molecule_getting_started_ci
 devto: true
 draft: false
 ---
-# Getting started with Molecule
+# Getting started with Ansible Molecule
 
 ## Intro
 
