@@ -13,8 +13,8 @@
     <language>en</language>
 
     
-    <pubDate>Mon, 31 Mar 2025 19:18:13 -0000</pubDate>
-    <lastBuildDate>Mon, 31 Mar 2025 19:18:13 -0000</lastBuildDate>
+    <pubDate>Fri, 04 Apr 2025 20:59:34 -0000</pubDate>
+    <lastBuildDate>Fri, 04 Apr 2025 20:59:34 -0000</lastBuildDate>
     <ttl>1440</ttl>
 
     
@@ -30,6 +30,22 @@
     
 
     
+    
+    <item>
+      <title>Using Github actions for fully automated CI</title>
+      
+      
+      
+      
+      <description>&lt;h1&gt;Using Github actions for fully automated CI&lt;/h1&gt;
+&lt;p&gt;The molecule test suite works just fine in a terminal session as well so lets use this perk to enable automate...&lt;/p&gt;</description>
+      <link>https://philnewm.github.io/using-github-actions-for-fully-automated-ci/</link>
+      <pubDate>Fri, 04 Apr 2025 00:00:00 +0000</pubDate>
+      <source url="https://philnewm.github.io/feed_rss_created.xml">Phils Blog</source>
+      
+      <guid isPermaLink="true">https://philnewm.github.io/using-github-actions-for-fully-automated-ci/</guid>
+      
+    </item>
     
     <item>
       <title>Getting started with Ansible Molecule</title>
