@@ -9,16 +9,6 @@
     "language": "en",
     "items": [
         {
-            "id": "https://philnewm.github.io/using-github-actions-for-fully-automated-ci/",
-            "url": "https://philnewm.github.io/using-github-actions-for-fully-automated-ci/",
-            "title": "Using Github actions for fully automated CI",
-            "content_html": "<h1>Using Github actions for fully automated CI</h1>\n<p>The molecule test suite works just fine in a terminal session as well so lets use this perk to enable automate...</p>",
-            "image": null,
-            "date_modified": "2025-04-04T00:00:00+00:00",
-            "authors": [],
-            "tags": null
-        },
-        {
             "id": "https://philnewm.github.io/molecule-start/",
             "url": "https://philnewm.github.io/molecule-start/",
             "title": "Getting started with Ansible Molecule",
